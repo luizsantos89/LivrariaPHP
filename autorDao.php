@@ -28,6 +28,14 @@ class AutorDAO
     {
         return date('Y-m-d', $data);
     }
+    
+    public function excluirAutor($id)
+    {
+        $sql = $this->con->prepare("delete from autores where autor_id=:id");
+        
+        $sql->bindValue(':id', $id);
+        $sql->execute();
+    }
 }
 
 
