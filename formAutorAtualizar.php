@@ -1,40 +1,54 @@
-<html>
-    <head>
-        <title>Atualização de Autores</title>
-    </head>
-    <body>
-    <center>
-        <?php
-            function formatarData($data){
-                return date('d/m/Y',$data);
-            }
-            
-            session_start();
-            $autor = $_SESSION['autor'];
-        ?>
-        
-        <h2>Alteração de Autores</h2>
-        
-        
-        <form action="controlerAutor.php?opcao=5" method="post">
-            <p>
-                ID: 
-                <input type="text" size="3" name="pld" value="<?php echo $autor->autor_id?>" readonly>
-            </p>
-            <p>
-                Nome do Autor: 
-                <input type="text" size="50" name="pNome" value="<?php echo $autor->nome?>"
-            </p>
-            <p>
-                E-mail de contato:
-                <input type="text" size="30" name="pEmail" value="<?php echo $autor->email?>"/>
-            </p>
-            <p>
-                Data de Nascimento:
-                <input type="text" size="15" name="pDataNasc" value="<?php echo formatarData(strotime($autor->dt_nasc))?>">
-            </p>
-        </form>
-        </p>
-    </center>
-    </body>
-</html>
+<HTML>
+<HEAD>
+ <TITLE>Formulário de Autor</TITLE>
+</HEAD>
+<BODY>
+<?php
+	
+	function formatarData($data){
+		return date('d/m/Y',$data);
+	}
+
+	session_start();
+
+	$autor = $_SESSION['autor'];
+
+?>
+
+
+<form action="controlerAutor.php?opcao=5" method="POST">
+	<div>
+    	<div>
+    		<div>
+			    <label>ID:</label>
+			        <div>
+			    		<input type="text" name="pId" value="<?php echo $autor->autor_id ?>" readonly>
+			  		</div>
+			</div>
+			<div>
+			    <label>Nome:</label>
+			        <div>
+			    		<input type="text" name="pNome" value="<?php echo $autor->nome ?>">
+			  		</div>
+			</div>
+			<div>
+			    <label>Email:</label>
+			        <div>
+			    		<input type="text" name="pEmail" value="<?php echo $autor->email ?>">
+			  		</div>
+			</div>
+			<div>
+			    <label>Data de nascimento:</label>
+			        <div>
+			    		<input type="text" name="pDataNasc" value="<?php echo formatarData(strtotime($autor->dt_nasc)) ?>">
+			  		</div>
+			</div>
+			<input type="hidden" name="opcao" value="5">
+		    <div>
+		        <button type="submit" class="btn btn-primary" value="Atualizar">Atualizar</button>
+		    </div>
+		</div>
+	</div>
+</form>
+</BODY>
+</HTML>
