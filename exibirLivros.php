@@ -53,7 +53,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href='controlerLivro.php?opcao=3&id=<?= $livro->isbn ?>'>Alterar</a>
+                                    <a href='controlerLivro.php?opcao=3&isbn=<?= $livro->isbn ?>'>Alterar</a>
                                 </td>
                             </tr>
                             <tr>

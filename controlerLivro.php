@@ -26,7 +26,7 @@
 		header('Location:exibirLivros.php');
 	}
 	if($opcao==3){
-		$isbn = $_REQUEST['id'];
+		$isbn = $_REQUEST['isbn'];
 
 		$livroDao = new LivroDAO();
 
@@ -37,6 +37,7 @@
 
 
 		echo $livro->isbn;
+                echo $livro->titulo;
 
 		$_SESSION['livro'] = $livro;
 
