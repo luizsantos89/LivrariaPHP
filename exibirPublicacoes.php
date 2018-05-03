@@ -8,10 +8,10 @@
  </HEAD>
 <BODY>
       <center>
-        <h1>Publica��es cadastrados</h1>
+        <h1>Publicações cadastradas</h1>
       <p>
       <div align="right">
-          <a href="controlerCarrinho.php?opcao=3"><img src="../imagens/meu-carrinho.png" border="0"></a>
+          <a href="controlerCarrinho.php?opcao=3"><img src="imagens/meu-carrinho.png" border="0"></a>
       </div>
 <?php
 
@@ -40,7 +40,7 @@
                </tr>
                <tr>
                    <td><b><font face="Verdana" size="5" color="red">R$ <?php echo $pub->getPreco(); ?></font></b></td>
-                   <td><?php echo "<a href='controlerCarrinho.php?opcao=1&id=".$pub->getId()."'><img src='imagens/botao_comprar2.png' border='0'></a>" ?></td>
+                   <td><?php echo "<a href='controlers/controlerCarrinho.php?opcao=1&id=".$pub->getId()."'><img src='imagens/botao_comprar2.png' border='0'></a>" ?></td>
                </tr>
                </table>
                <p>

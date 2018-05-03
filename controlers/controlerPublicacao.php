@@ -1,6 +1,6 @@
 <?php
 
-    require_once('../modeloLivraria.inc');
+    require_once('../classes/modeloLivraria.inc');
     require_once('../dao/publicacaoDao.inc');
 
     $opcao = (int)$_REQUEST['opcao'];

@@ -16,7 +16,7 @@
 ?>
 
 
-<form action="controlerAutor.php?opcao=5" method="POST">
+<form action="controlers/controlerAutor.php?opcao=5" method="POST">
 	<div>
     	<div>
             <div>

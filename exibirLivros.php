@@ -53,12 +53,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href='controlerLivro.php?opcao=3&isbn=<?= $livro->isbn ?>'>Alterar</a>
+                                    <a href='controlers/controlerLivro.php?opcao=3&isbn=<?= $livro->isbn ?>'>Alterar</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="controlerLivro.php?opcao=4&isbn=<?= $livro->isbn ?>">Excluir</a>
+                                    <a href="controlers/controlerLivro.php?opcao=4&isbn=<?= $livro->isbn ?>">Excluir</a>
                                 </td>
                             </tr>
                         </table>

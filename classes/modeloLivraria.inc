@@ -1,143 +1,132 @@
 <?php
 
-class Autor{
-      public $autor_id;
-      public $nome;
-      public $email;
-      public $data_nascimento;
+	class Autor{
+		public $autor_id;
+		public $nome;
+		public $email;
+		public $dt_nasc;
 
-      public function setAutor($id,$nome,$email,$data)
-      {
-               $this->autor_id = $id;
-               $this->nome = $nome;
-               $this->email = $email;
-               $this->data_nascimento = strtotime($data);
-      }
-      
-      function Autor($nome,$email,$data)
-      {
-               $this->nome = $nome;
-               $this->email = $email;
-               $this->data_nascimento = strtotime(str_replace('/','-',$data));
-      }
+		public function setAutor($id,$nome,$email,$data)
+		{
+			$this->autor_id = $id;
+			$this->nome = $nome;
+			$this->email = $email;
+			$this->dt_nasc = strtotime($data);
+		}
 
-      public function getAutor_id()
-      {
-             return $this->autor_id;
-      }
-      
-      public function setAutor_id($pId)
-      {
-             return $this->autor_id = $pId;
-      }
+		function Autor($nome,$email,$data){
+			$this->nome = $nome;
+			$this->email = $email;
+			$this->dt_nasc = strtotime(str_replace('/', '-', $data)) ;
+		}
 
-      public function getNome()
-      {
-             return $this->nome;
-      }
+		public function getAutor_id(){
+			return $this->autor_id;
+		}
 
-      public function setNome($pNome)
-      {
-             return $this->nome = $pNome;
-      }
+		public function setAutor_id($pId){
+			return $this->autor_id = $pId;
+		}
 
-      public function getEmail()
-      {
-             return $this->email;
-      }
+		public function getNome(){
+			return $this->nome;
+		}
 
-      public function setEmail($pEmail)
-      {
-             return $this->email = $pEmail;
-      }
+		public function setNome($pNome){
+			return $this->nome = $pNome;
+		}
 
-      public function getDataNascimento()
-      {
-             return $this->data_nascimento;
-      }
+		public function getEmail(){
+			return $this->email;
+		}
 
-      public function setDataNascimento($pData)
-      {
-             return $this->data_nascimento = strtotime($pData);
-      }
+		public function setEmail($pEmail){
+			return $this->email = $pEmail;
+		}
 
-}
+		public function getDataNascimento(){
+			return $this->dt_nasc;
+		}
 
-class Publicacao
-{
-      public $pub_id;
-      public $isbn;
-      public $titulo;
-      public $autor;
-      public $editora;
-      public $preco;
+		public function setDataNascimento($pData){
+			return $this->dt_nasc = strtotime($pData);
+		}
+	}
 
-      function Publicacao()
-      {
+	class Livro{
+		public $isbn;
+		public $titulo;
+		public $edicao_num;
+		public $ano_publicacao;
+		public $descricao;
+		public $preco;
 
-      }
-      
-      public function setId($pub_id)
-      {
-            $this->pub_id = $pub_id;
-      }
+		public function setLivro($isbn, $titulo, $edicao_num, $ano_publicacao, $descricao, $preco){
+			$this->isbn = $isbn;
+			$this->titulo = $titulo;
+			$this->edicao_num = $edicao_num;
+			$this->ano_publicacao = strtotime($ano_publicacao);
+			$this->descricao = $descricao;
+			$this->preco = $preco;
+		}
 
-      public function setIsbn($isbn)
-      {
-            $this->isbn = $isbn;
-      }
-      
-      public function setTitulo($titulo)
-      {
-            $this->titulo = $titulo;
-      }
+		public function Livro($isbn, $titulo, $edicao_num, $ano_publicacao, $descricao, $preco){
+			$this->isbn = $isbn;
+			$this->titulo = $titulo;
+			$this->edicao_num = $edicao_num;
+			$this->ano_publicacao = $ano_publicacao;
+			$this->descricao = $descricao;
+			$this->preco = $preco;
+		}
 
-      public function setAutor($autor)
-      {
-            $this->autor = $autor;
-      }
+		public function getIsbn(){
+			return $this->isbn;
+		}
 
-      public function setEditora($editora)
-      {
-            $this->editora = $editora;
-      }
-      
-      public function setPreco($preco)
-      {
-            $this->preco = $preco;
-      }
-      
-      public function getId()
-      {
-            return $this->pub_id;
-      }
+		public function setIsbn($pIsbn){
+			return $this->isbn = $pIsbn;
+		}
 
-      public function getIsbn()
-      {
-            return $this->isbn;
-      }
-      
-      public function getTitulo()
-      {
-            return $this->titulo;
-      }
+		public function getTitulo(){
+			return $this->titulo;
+		}
 
-      public function getAutor()
-      {
-            return $this->autor;
-      }
+		public function setTitulo($pTitulo){
+			return $this->titulo = $pTitulo;
+		}
 
-      public function getEditora()
-      {
-            return $this->editora;
-      }
+		public function getEdicao_num(){
+			return $this->edicao_num;
+		}
 
-      public function getPreco()
-      {
-            return $this->preco;
-      }
+		public function setEdicao_num($pEdicao_num){
+			return $this->edicao_num = $pEdicao_num;
+		}
 
+		public function getAno_publicacao(){
+			return $this->ano_publicacao;
+		}
 
-}
+		public function setAno_publicacao($pAno_publicacao){
+			return $this->ano_publicacao = $pAno_publicacao;
+		}
+
+		public function getDescricao(){
+			return $this->descricao;
+		}
+
+		public function setDescricao($pDescricao){
+			return $this->descricao = $pDescricao;
+		}
+
+		public function getPreco(){
+			return $this->preco;
+		}
+
+		public function setPreco($pPreco){
+			return $this->preco = $pPreco;
+		}
+
+	}
 
 ?>

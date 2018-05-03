@@ -1,7 +1,7 @@
 <?php
-	require_once('conexao.inc');
-	require_once('LivroDAO.php');
-	require_once('modeloLivraria.inc');
+	require_once('../dao/conexao.inc');
+	require_once('../dao/LivroDAO.php');
+	require_once('../classes/modeloLivraria.inc');
 
 	$opcao = (int)$_REQUEST['opcao'];
 
@@ -23,7 +23,7 @@
 
 		$_SESSION['livros'] = $lista;
 
-		header('Location:exibirLivros.php');
+		header('Location:../exibirLivros.php');
 	}
 	if($opcao==3){
 		$isbn = $_REQUEST['isbn'];
@@ -41,7 +41,7 @@
 
 		$_SESSION['livro'] = $livro;
 
-		header("Location:formLivroAtualizar.php");
+		header("Location:../formLivroAtualizar.php");
 	}
         
 
@@ -54,5 +54,18 @@
 
 		header("Location:controlerLivro.php?opcao=2");
 	}
+        
+        if($opcao == 5) {
+            
+	if($opcao==5){
+            $livro = new Livro($_POST["pIsbn"],$_POST["pTitulo"],$_POST["pEdicao_num"],$_POST["pAno_publicacao"],
+                    $_POST["pDescricao"],$_POST["pPreco"]);
 
+            $livroDAO = new LivroDAO();
+
+            $livroDAO->atualizarLivro($livro);
+
+             header("Location:controlerLivro.php?opcao=2");
+	}
+    }
 ?>

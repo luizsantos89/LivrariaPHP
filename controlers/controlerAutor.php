@@ -26,7 +26,7 @@
 
 		$_SESSION['autores'] = $lista;
 
-		header("Location:exibirAutores.php");
+		header("Location:../exibirAutores.php");
 
 	}
 	if($opcao == 3){
@@ -39,7 +39,7 @@
 		session_start();
 		$_SESSION['autor'] = $autor;
 
-		header("Location:formAutorAtualizar.php");
+		header("Location:../formAutorAtualizar.php");
 
 	}
 
