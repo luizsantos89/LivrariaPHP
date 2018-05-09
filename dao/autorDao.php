@@ -1,68 +1,115 @@
 <?php
 
-	require_once('conexao.inc');
-	require_once('modeloLivraria.inc');
+require ('conexao.inc');
+require ('../classes/modeloLivraria.inc');
 
-	class AutorDAO{
-		private $con;
+class AutorDao
+{
+       private $con;
+       public $porPagina;
+       
+       function AutorDao()
+       {
+           $c = new Conexao();
+           $this->con = $c->getConexao();
+           $this->porPagina = 10;
+       }
+       
+       public function incluirAutor(Autor $autor)
+       {
+                $sql = $this->con->prepare("insert into autores (nome, email, dt_nasc) values (:nom, :em, :data)");
+                $sql->bindValue(':nom', $autor->getNome());
+                $sql->bindValue(':em', $autor->getEmail());
+                $sql->bindValue(':data', $this->converteDataMysql($autor->getDataNascimento()));
+                $sql->execute();
+       }
+       
+       public function incluirVariosAutores()
+       {
+            for($i=1;$i<=100;$i++)
+            {
+                $sql = $this->con->prepare("insert into autores (nome, email, dt_nasc) values (:nom, :em, :data)");
 
-		function AutorDao(){
-			$c = new Conexao();
-			$this->con = $c->getConexao();
-		}
+                $sql->bindValue(':nom', 'nome '.$i);
+                $sql->bindValue(':em', 'email'.$i.'@dominio.com.br');
+                $sql->bindValue(':data', '2100-12-31');
+                $sql->execute();
+            }
+       }
 
-		public function incluirAutor(Autor $autor){
-			$sql = $this->con->prepare("insert into autores (nome, email, dt_nasc) values (:nom, :em, :data)");
+       public function getAutores()
+       {
+                $rs = $this->con->query("SELECT * FROM autores");
 
-			$sql->bindValue(':nom', $autor->getNome());
-			$sql->bindValue(':em', $autor->getEmail());
-			$sql->bindValue(':data', $this->converteDataMysql($autor->getDataNascimento()));			
-			$sql->execute();
-		}
+                $lista = array();
+                while($row = $rs->fetch(PDO::FETCH_OBJ))
+                {
+                           $lista[] = $row;
+                }
+                return $lista;
+       }
 
-		function converteDataMysql($data){
-			return date('Y-m-d', $data);
-		}
+       public function getAutoresPaginacao($pagina)
+       {
+            $init = ($pagina - 1) * $this->porPagina;
+            
+            $result = $this->con->query("SELECT * FROM autores LIMIT $init, $this->porPagina");
+            
+            $lista = array();
+            
+            while($row = $result->fetch(PDO::FETCH_OBJ)) {
+                $lista[]=$row;
+            }
+            
+            return $lista;
+       }
+       
+       public function getPagina()
+       {
+              $result_total = $this->con->query("SELECT count(*) as total FROM autores")->fetch(PDO::FETCH_OBJ);
 
-		public function getAutores(){
-			$rs = $this->con->query("SELECT * FROM autores");
+              $num_paginas = ceil( $result_total->total / $this->porPagina);
 
-			$lista = array();
-			while($autor=$rs->fetch(PDO::FETCH_OBJ)){
-				$lista[] = $autor;
-			}
+              return $num_paginas;
+       
+       }
 
-			return $lista;
-		}
+       public function excluirAutor($id)
+       {
+                $sql = $this->con->prepare("delete from autores where autor_id = :id");
 
-		public function excluirAutor($id){
+                $sql->bindValue(':id', $id);
+                $sql->execute();
+       }
+       
+       public function getAutor($id)
+       {
+                $sql = $this->con->prepare("SELECT * FROM autores where autor_id = :id");
 
-			$sql=$this->con->prepare("delete from autores where autor_id= :id");
+                $sql->bindValue(':id', $id);
+                $sql->execute();
+                
+                return $sql->fetch(PDO::FETCH_OBJ);
+       }
+       
+       public function atualizarAutor(Autor $autor)
+       {
+            $sql = $this->con->prepare("update autores set nome= :nom, email= :em, dt_nasc= :data where autor_id= :id");
+            $sql->bindValue(':nom', $autor->getNome());
+            $sql->bindValue(':em', $autor->getEmail());
+            $sql->bindValue(':data', $this->converteDataMysql($autor->getDataNascimento()));
+            $sql->bindValue(':id', $autor->getAutor_id());
+            $sql->execute();
+       }
 
-			$sql->bindValue(':id', $id);
-			$sql->execute();
-		}
 
-		public function getAutor($id){
-			$sql = $this->con->prepare("SELECT * FROM autores where autor_id = :id");
-			$sql->bindValue(':id', $id);
-			$sql->execute();
+       function converteDataMysql($data)
+       {
+            return date('Y-m-d',$data);
+       }
+       
 
-			return $sql->fetch(PDO::FETCH_OBJ); // retorna o registro da tabela no formato do objeto Autor capturado
-
-		}
-
-		public function atualizarAutor(Autor $autor){
-			$sql = $this->con->prepare("update autores set nome=:nom, email= :em, dt_nasc= :data where autor_id=:id");
-
-			$sql->bindValue(':nom', $autor->getNome());
-			$sql->bindValue(':em', $autor->getEmail());
-			$sql->bindValue(':data', $this->converteDataMysql($autor->getDataNascimento()));
-			$sql->bindValue(':id', $autor->getAutor_id());
-
-			$sql->execute();
-		}
-
-	}
+}
 
 ?>
+

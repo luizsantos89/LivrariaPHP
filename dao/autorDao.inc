@@ -1,7 +1,7 @@
 <?php
 
-require_once('conexao.inc');
-require_once('../classes/modeloLivraria.inc');
+require ('conexao.inc');
+require ('../classes/modeloLivraria.inc');
 
 class AutorDao
 {
@@ -18,7 +18,6 @@ class AutorDao
        public function incluirAutor(Autor $autor)
        {
                 $sql = $this->con->prepare("insert into autores (nome, email, dt_nasc) values (:nom, :em, :data)");
-
                 $sql->bindValue(':nom', $autor->getNome());
                 $sql->bindValue(':em', $autor->getEmail());
                 $sql->bindValue(':data', $this->converteDataMysql($autor->getDataNascimento()));
@@ -104,19 +103,20 @@ class AutorDao
        
        public function atualizarAutor(Autor $autor)
        {
-                $sql = $this->con->prepare("update autores set nome= :nom, email= :em, dt_nasc= :data where autor_id= :id");
-                $sql->bindValue(':nom', $autor->getNome());
-                $sql->bindValue(':em', $autor->getEmail());
-                $sql->bindValue(':data', $this->converteDataMysql($autor->getDataNascimento()));
-                $sql->bindValue(':id', $autor->getAutor_id());
-                $sql->execute();
+            $sql = $this->con->prepare("update autores set nome= :nom, email= :em, dt_nasc= :data where autor_id= :id");
+            $sql->bindValue(':nom', $autor->getNome());
+            $sql->bindValue(':em', $autor->getEmail());
+            $sql->bindValue(':data', $this->converteDataMysql($autor->getDataNascimento()));
+            $sql->bindValue(':id', $autor->getAutor_id());
+            $sql->execute();
        }
 
 
        function converteDataMysql($data)
        {
-               return date('Y-m-d',$data);
+            return date('Y-m-d',$data);
        }
+       
 
 }
 
