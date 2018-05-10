@@ -4,10 +4,10 @@
     $opcao = (int)$_REQUEST['opcao'];
 
     if($opcao == 1){
-            $autor = new Autor($_POST["nome"],$_POST["email"],$_POST["data"]);
-            $AutorDAO = new AutorDAO();
-            $AutorDAO->incluirAutor($autor);
-            header("Location:controlerAutor.php?opcao=2");
+        $autor = new Autor($_POST["nome"],$_POST["email"],$_POST["data"]);
+        $AutorDAO = new AutorDAO();
+        $AutorDAO->incluirAutor($autor);
+        header("Location:controlerAutor.php?opcao=2");
     }
     
     if($opcao==2){
@@ -49,7 +49,7 @@
         $lista = $autorDao->getAutoresPaginacao($pagina);
         $numpaginas = $autorDao->getPagina();
         session_start();
-        $_SESSION["autores"] = lista;
+        $_SESSION["autores"] = $lista;
         header("Location:../exibirAutoresPaginacao.php?paginas=".$numpaginas);
     }
 ?>

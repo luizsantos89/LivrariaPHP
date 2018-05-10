@@ -12,7 +12,7 @@ class AutorDao
        {
            $c = new Conexao();
            $this->con = $c->getConexao();
-           $this->porPagina = 10;
+           $this->porPagina = 5;
        }
        
        public function incluirAutor(Autor $autor)
